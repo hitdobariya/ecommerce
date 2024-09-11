@@ -72,7 +72,7 @@ exports.deletereview = async (req, res) => {
         console.log(reviewId);
         const review = await Review.findOne({ _id: reviewId, userId, isDelete: false });
         if (!review) { return res.status(404).json({ message: 'Review not found...' }); }
-        if (!userId) { return res.status(403).json({ message: 'You can not update this review...' }); }
+        if (!userId) { return res.status(403).json({ message: 'You can not delete this review...' }); }
         review.isDelete = true;
         await review.save();
         res.status(200).json({ message: 'Review soft deleted successfully...' });

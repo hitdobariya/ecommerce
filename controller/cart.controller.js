@@ -2,6 +2,7 @@ const Cart = require("../model/cart.model");
 const Product = require("../model/product.model");
 
 exports.addtocart = async (req, res) => {
+    
     try {
         const { product_id, quantity } = req.query;
         const user = req.user._id;
@@ -34,6 +35,7 @@ exports.addtocart = async (req, res) => {
         console.log(error);
         res.status(500).json({ message: 'Internal server error...' });
     }
+
 };
 
 
@@ -41,10 +43,17 @@ exports.addtocart = async (req, res) => {
 exports.getcarts = async (req, res) => {
 
     try {
-        let carts = await Cart.find({ userId: req.user._id, isDelete: false }).populate('productId', 'productName price');
-        let totalPrice = await carts.reduce((total, item) => total + item.totalAmount, 0);
-        console.log(totalPrice);
-        res.json({ carts, totalPrice });
+        let carts = await Cart.find({ userId: req.user._id, isDelete: false }).populate('productId', 'productname');
+        // let cartItem = carts.map((item) => ({
+        //     productId: item.productId,
+        //     quantity: item.quantity,
+        //     price: item.productId.price,
+        //     totalAmount: item.quantity * item.productId.price
+        // }));
+        // let totalPrice = await cartItem.reduce((total, item) => total += item.totalAmount, 0);
+        // console.log(cartItem);
+        
+        res.json({ carts });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Internal server error...' });
@@ -56,11 +65,10 @@ exports.getcarts = async (req, res) => {
 exports.deletecart = async (req, res) => {
 
     try {
-        let cart = await Cart.findById({ userId: req.user._id, isDelete: false });
+        let cart = await Cart.find({ userId: req.user._id, isDelete: false });
         if (!cart) return res.status(404).json({ message: 'cart not found...' });
         cart = await Cart.updateOne({ _id: req.query.cartId }, { $set: { isDelete: true } }, { new: true });
-        console.log(cart);
-        if (!cart) return res.status(404).json({ message: 'cart not found...' });
+        // console.log(cart);
         res.status(200).json({ message: 'cart deleted...', cart });
     } catch (error) {
         console.log(error);

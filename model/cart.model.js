@@ -4,11 +4,11 @@ const { isReadable } = require('nodemailer/lib/xoauth2');
 const cartSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'users'
     },
     productId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'products',
+        ref: 'products'
     },
     items: [
         {
@@ -19,14 +19,16 @@ const cartSchema = new mongoose.Schema({
                 default: 1
             },
             price: {
-                type: Number,
+                type: Number
             },
             totalAmount: {
-                type: Number,
-                default: 0
+                type: Number
             },
         }
     ],
+    totalPrice:{
+        type: Number
+    },
     createdAt: {
         type: Date,
         default: Date.now
