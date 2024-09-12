@@ -1,8 +1,8 @@
 const express = require('express');
 const reviewRoutes = express.Router();
+const { createreview, getproductreviews, getuserreviews, updatereview, deletereview } = require('../controller/review.controller');
 const { verifyToken } = require("../helper/tokenVerify");
 
-const { createreview, getproductreviews, getuserreviews, updatereview, deletereview } = require('../controller/review.controller');
 
 reviewRoutes.post('/addreview', verifyToken, createreview);
 

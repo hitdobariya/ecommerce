@@ -33,21 +33,6 @@ exports.getuseraddresses = async (req, res) => {
 };
 
 
-exports.getalluseraddress = async (req, res) => {
-
-    try {
-        let admin = await userservice.isuser({ _id: req.user._id, role: 'admin' });
-        if (!admin) { return res.json(400).json({ message: 'only admin can see users...' }); }
-        let address = await Address.find().populate('userId', 'name');
-        res.status(200).json(address);
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'internal server error...' });
-    }
-
-}
-
-
 exports.updateaddress = async (req, res) => {
 
     try {

@@ -13,10 +13,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const userRoutes = require('./routes/user.routes');
+const adminRoutes = require('./routes/admin.routes');
 const productRoutes = require('./routes/product.routes');
 const reviewRoutes = require('./routes/review.routes');
 const addressRoutes = require('./routes/address.routes');
 const cartRoutes = require('./routes/cart.routes');
+const orderRoutes = require('./routes/order.routes');
 
 const path = require('path');
 app.use("profileimages", express.static(path.join(__dirname, 'profileimages')));
@@ -31,10 +33,12 @@ const ejs = require('ejs');
 app.set("view engine", 'ejs');
 
 app.use("/api/user", userRoutes);
+app.use("/api/admin", adminRoutes)
 app.use("/api/product", productRoutes);
 app.use("/api/review", reviewRoutes);
 app.use("/api/address", addressRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/order", orderRoutes);
 
 app.listen(port, async () => {
   await mongoose

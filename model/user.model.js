@@ -18,16 +18,8 @@ const userSchema  = mongoose.Schema({
     profileimage: String,
     otp:String,
     otpExpiry: { 
-        type: Date 
+        type: Date
     },
-    // shippigaddress: {
-    //      type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'address'
-    // },
-    // paymentmethod: {
-    //      type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'payment'
-    // }
     isDelete:{
         type: Boolean,
         default: false
