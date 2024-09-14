@@ -1,19 +1,16 @@
 const productservices = require('../services/product.services');
 const productservice = new productservices();
-const userservices = require('../services/user.services');
-const userservice = new userservices();
 
 
 exports.home = async (req, res) => {
 
     try {
-        let product = await productservice.getall();
+        let product = await productservice.getall(req.query);
         res.status(200).json(product);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'internal server error...' });
     }
-
 };
 
 

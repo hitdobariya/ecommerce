@@ -1,6 +1,4 @@
 const Address = require('../model/address.model');
-const userservices = require('../services/user.services');
-const userservice = new userservices();
 
 
 exports.createaddress = async (req, res) => {
