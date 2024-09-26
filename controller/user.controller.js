@@ -136,10 +136,12 @@ exports.showotp = (req, res) => {
 
 };
 
+
 exports.sendotp = async (req, res) => {
 
     try {
-        const { otpmail, otp } = req.body;
+        const otpmail = req.query.email;
+        const  otp  = req.body;
         console.log(otpmail);
 
         const user = await userservice.isuser({ email: otpmail, isDelete: false });
